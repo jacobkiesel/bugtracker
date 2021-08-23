@@ -31,8 +31,10 @@ submit.addEventListener("click", function (e) {
   e.preventDefault();
   saveBug();
 });
+
 submitUpdate.addEventListener("click", function (e) {
   e.preventDefault();
+  removeFromStorage(e.target.nextElementSibling.innerHTML);
   saveBugUpdate();
   modal.classList.toggle("hidden");
 });
@@ -41,37 +43,44 @@ const pushToList = function (bug) {
   list.insertAdjacentHTML(
     "beforebegin",
     `<div>
-        <p>🛣: ${bug.project} Miles</p>
-        <p>📆: ${bug.bug}</p>
-        <p>🕰: ${bug.issue} Minutes</p>
-        <p>🌡: ${bug.fixes}°F</p>
-        <p> when: ${bug.date}</p>
-        <div class= "id hidden">${bug.id}</div>
+        <p>Date:    ${bug.date}</p>
+        <p>Project: ${bug.project}</p>
+        <p>Issue:   ${bug.issue}</p>
+        <p>Fixes:   ${bug.fixes}</p>
+        <p class= "id hidden">${bug.id}</p>
         <button class="delete">Delete</button>
         <button class="update">Update</button>
     </div>`
   );
-  const deleteBtn = document.querySelector(".delete");
-  const updateBtn = document.querySelector(".update");
+};
 
-  deleteBtn.addEventListener("click", function (e) {
-    console.log("hi");
-    removeFromStorage(e.target.previousElementSibling);
-    deleteBtn.parentElement.remove();
-  });
-  updateBtn.addEventListener("click", function (e) {
-    console.log("hi");
+window.addEventListener("click", function (e) {
+  if (e.target.classList.contains("update")) {
+    e.preventDefault();
+    e.target.parentElement.remove();
     updateBugLog(e.target.previousElementSibling.previousElementSibling);
     removeFromStorage(e.target.previousElementSibling.previousElementSibling);
-    updateBtn.parentElement.remove();
-  });
-};
+  }
+  if (e.target.classList.contains("delete")) {
+    e.preventDefault();
+    removeFromStorage(e.target.previousElementSibling);
+    e.target.parentElement.remove();
+  }
+  if (e.target.classList.contains("close")) {
+    e.preventDefault();
+    saveBugUpdate();
+    modal.classList.toggle("hidden");
+  }
+});
+
+const modalID = document.querySelector("#id-modal");
 
 const populateModal = function (log) {
   bugUpdate.value = log.bug;
   projectUpdate.value = log.project;
   issueUpdate.value = log.issue;
   fixesUpdate.value = log.fixes;
+  modalID.innerHTML = log.id;
 };
 
 const generateLog = function () {
@@ -90,7 +99,7 @@ const generateList = function (log) {
 };
 
 const saveBug = function () {
-  const log = {
+  let log = {
     bug: bug.value,
     project: project.value,
     issue: issue.value,
@@ -104,7 +113,7 @@ const saveBug = function () {
 };
 
 const saveBugUpdate = function () {
-  const log = {
+  let log = {
     bug: bugUpdate.value,
     project: projectUpdate.value,
     issue: issueUpdate.value,
@@ -112,7 +121,7 @@ const saveBugUpdate = function () {
     id: Math.floor(Math.random() * 1000),
     date: now.toLocaleDateString("en-US", options),
   };
-  modal.classList.toggle("hidden");
+  bugLog.unshift(log);
   localStorage.setItem(localStorage.length, JSON.stringify(log));
   pushToList(log);
 };
@@ -132,13 +141,12 @@ const removeFromStorage = function (id) {
   });
   bugLog.forEach((bug) => {
     if (bug === null) return;
-    else localStorage.setItem(localStorage.lenght, JSON.stringify(bug));
+    else localStorage.setItem(localStorage.length, JSON.stringify(bug));
   });
 };
 
 const updateBugLog = function (id) {
   const value = id.innerHTML;
-  localStorage.clear();
   let log;
   bugLog.forEach((bug, i) => {
     if (bug === null) return;
@@ -150,10 +158,6 @@ const updateBugLog = function (id) {
   });
   modal.classList.toggle("hidden");
   populateModal(log);
-  bugLog.forEach((bug) => {
-    if (bug === null) return;
-    else localStorage.setItem(localStorage.lenght, JSON.stringify(bug));
-  });
 };
 
 const init = function () {
