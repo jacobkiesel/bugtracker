@@ -72,6 +72,14 @@ window.addEventListener("click", function (e) {
   }
 });
 
+window.addEventListener("keydown", (e) => {
+  if (e.key == "Escape") {
+    e.preventDefault();
+    saveBugUpdate();
+    modal.classList.add("hidden");
+  }
+});
+
 const modalID = document.querySelector("#id-modal");
 
 const populateModal = function (log) {
