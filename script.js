@@ -41,11 +41,10 @@ submitUpdate.addEventListener("click", function (e) {
 
 const pushToList = function (bug) {
   list.insertAdjacentHTML(
-    "beforebegin",
-    `<div>
+    "afterbegin",
+    `<div class="bug-box">
         <p>Date:    ${bug.date}</p>
         <p>Project: ${bug.project}</p>
-        <p>Issue:   ${bug.issue}</p>
         <p>Fixes:   ${bug.fixes}</p>
         <p class= "id hidden">${bug.id}</p>
         <button class="delete">Delete</button>
@@ -78,7 +77,6 @@ const modalID = document.querySelector("#id-modal");
 const populateModal = function (log) {
   bugUpdate.value = log.bug;
   projectUpdate.value = log.project;
-  issueUpdate.value = log.issue;
   fixesUpdate.value = log.fixes;
   modalID.innerHTML = log.id;
 };
@@ -102,7 +100,6 @@ const saveBug = function () {
   let log = {
     bug: bug.value,
     project: project.value,
-    issue: issue.value,
     fixes: fixes.value,
     id: Math.floor(Math.random() * 1000),
     date: now.toLocaleDateString("en-US", options),
@@ -116,7 +113,6 @@ const saveBugUpdate = function () {
   let log = {
     bug: bugUpdate.value,
     project: projectUpdate.value,
-    issue: issueUpdate.value,
     fixes: fixesUpdate.value,
     id: Math.floor(Math.random() * 1000),
     date: now.toLocaleDateString("en-US", options),

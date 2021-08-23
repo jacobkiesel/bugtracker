@@ -14,21 +14,21 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Bug Tracker</h1>
     <div>
+      <h1>Bug Tracker</h1>
+      <br />
+      <br />
       <form class="form" action="">
-        <label for="bug">Bug: </label>
-        <input class="bug" name="bug" type="text" required /><br />
         <label for="project">Project: </label>
         <input class="project" name="project" type="text" required /><br />
-        <label for="issue">Issue: </label>
-        <input class="issue" name="issue" type="text" required /><br />
+        <label for="bug">Bug: </label>
+        <input class="bug" name="bug" type="text" required /><br />
         <label for="fixes">Possible Fixes:</label>
         <textarea
           class="fixes"
           name="fixes"
-          rows="4"
-          cols="17"
+          rows="2"
+          cols="19"
           required
         ></textarea
         ><br />
@@ -37,7 +37,7 @@
     </div>
     <div id="list"></div>
     <div class="modal hidden">
-      <form class="form-update" action="">
+      <form class="form form-update" action="">
         <label for="bug-update">Bug: </label>
         <input
           class="bug-update"
@@ -52,19 +52,12 @@
           type="text"
           required
         /><br />
-        <label for="issue-update">Issue: </label>
-        <input
-          class="issue-update"
-          name="issue-update"
-          type="text"
-          required
-        /><br />
         <label for="fixes-update">Possible Fixes:</label>
         <textarea
           class="fixes-update"
           name="fixes-update"
           rows="4"
-          cols="17"
+          cols="19"
           required
         ></textarea
         ><br />

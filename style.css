@@ -4,8 +4,24 @@
   font-family: "Roboto Mono", monospace;
   color: white;
 }
+html {
+  display: flex;
+  justify-content: center;
+}
+h1 {
+  padding-top: 20px;
+  font-size: 2.5em;
+  text-align: left;
+  text-decoration: underline;
+  text-shadow: 2px 2px 1px rgba(110, 117, 7, 0.486);
+}
 body {
   background-color: rgb(48, 48, 71);
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+  justify-content: center;
+  align-items: center;
 }
 input,
 textarea {
@@ -19,9 +35,36 @@ button {
   border: 1px solid white;
   border-radius: 4px;
 }
+button:hover {
+  background: white;
+  color: rgb(48, 48, 71);
+}
+#list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.bug-box {
+  text-align: right;
+  margin: 10px;
+  border: 2px solid white;
+  padding: 20px;
+  border-radius: 10px;
+}
 .form {
   text-align: right;
+  border: 2px solid white;
+  padding: 20px;
+  border-radius: 10px;
 }
 .hidden {
   display: none;
+}
+.modal {
+  margin-top: 0;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.418);
 }
