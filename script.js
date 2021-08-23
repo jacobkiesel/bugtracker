@@ -46,8 +46,10 @@ const pushToList = function (bug) {
       <button class="update">Update</button>
     </div>`
   );
+
   const deleteBtn = document.querySelector(".delete");
   const updateBtn = document.querySelector(".update");
+
   deleteBtn.addEventListener("click", function (e) {
     removeFromStorage(e.target.previousElementSibling);
     deleteBtn.parentElement.remove();
