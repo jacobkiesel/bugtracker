@@ -31,33 +31,39 @@ submit.addEventListener("click", function (e) {
   e.preventDefault();
   saveBug();
 });
+submitUpdate.addEventListener("click", function (e) {
+  e.preventDefault();
+  saveBugUpdate();
+  modal.classList.toggle("hidden");
+});
 
 const pushToList = function (bug) {
   list.insertAdjacentHTML(
     "beforebegin",
     `<div>
-    <p>🛣: ${bug.project} Miles</p>
+        <p>🛣: ${bug.project} Miles</p>
         <p>📆: ${bug.bug}</p>
         <p>🕰: ${bug.issue} Minutes</p>
         <p>🌡: ${bug.fixes}°F</p>
         <p> when: ${bug.date}</p>
         <div class= "id hidden">${bug.id}</div>
-      <button class="delete">Delete</button>
-      <button class="update">Update</button>
+        <button class="delete">Delete</button>
+        <button class="update">Update</button>
     </div>`
   );
-
   const deleteBtn = document.querySelector(".delete");
   const updateBtn = document.querySelector(".update");
 
   deleteBtn.addEventListener("click", function (e) {
+    console.log("hi");
     removeFromStorage(e.target.previousElementSibling);
     deleteBtn.parentElement.remove();
   });
   updateBtn.addEventListener("click", function (e) {
+    console.log("hi");
     updateBugLog(e.target.previousElementSibling.previousElementSibling);
     removeFromStorage(e.target.previousElementSibling.previousElementSibling);
-    e.target.parentElement.remove();
+    updateBtn.parentElement.remove();
   });
 };
 
@@ -66,11 +72,6 @@ const populateModal = function (log) {
   projectUpdate.value = log.project;
   issueUpdate.value = log.issue;
   fixesUpdate.value = log.fixes;
-  submitUpdate.addEventListener("click", function (e) {
-    e.preventDefault;
-    modal.classList.toggle("hidden");
-    saveBugUpdate();
-  });
 };
 
 const generateLog = function () {
@@ -94,7 +95,7 @@ const saveBug = function () {
     project: project.value,
     issue: issue.value,
     fixes: fixes.value,
-    id: ID,
+    id: Math.floor(Math.random() * 1000),
     date: now.toLocaleDateString("en-US", options),
   };
   bugLog.unshift(log);
@@ -108,7 +109,7 @@ const saveBugUpdate = function () {
     project: projectUpdate.value,
     issue: issueUpdate.value,
     fixes: fixesUpdate.value,
-    id: ID,
+    id: Math.floor(Math.random() * 1000),
     date: now.toLocaleDateString("en-US", options),
   };
   modal.classList.toggle("hidden");
@@ -139,7 +140,6 @@ const updateBugLog = function (id) {
   const value = id.innerHTML;
   localStorage.clear();
   let log;
-  //   localStorage.clear();
   bugLog.forEach((bug, i) => {
     if (bug === null) return;
     else {
