@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Bug Tracker</h1>
+    <div>
+      <form class="form" action="">
+        <label for="bug">Bug: </label>
+        <input class="bug" name="bug" type="text" required /><br />
+        <label for="project">Project: </label>
+        <input class="project" name="project" type="text" required /><br />
+        <label for="issue">Issue: </label>
+        <input class="issue" name="issue" type="text" required /><br />
+        <label for="fixes">Possible Fixes:</label>
+        <textarea
+          class="fixes"
+          name="fixes"
+          rows="4"
+          cols="17"
+          required
+        ></textarea
+        ><br />
+        <input class="submit" type="submit" />
+      </form>
+    </div>
+    <div id="list"></div>
+    <div class="modal hidden">
+      <form class="form" action="">
+        <label for="bug">Bug: </label>
+        <input class="bug-update" name="bug" type="text" required /><br />
+        <label for="project">Project: </label>
+        <input
+          class="project-update"
+          name="project"
+          type="text"
+          required
+        /><br />
+        <label for="issue">Issue: </label>
+        <input class="issue-update" name="issue" type="text" required /><br />
+        <label for="fixes">Possible Fixes:</label>
+        <textarea
+          class="fixes-update"
+          name="fixes"
+          rows="4"
+          cols="17"
+          required
+        ></textarea
+        ><br />
+        <input class="submit-update" type="submit" />
+      </form>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
