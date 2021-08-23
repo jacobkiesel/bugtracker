@@ -5,7 +5,6 @@ const project = document.querySelector(".project");
 const issue = document.querySelector(".issue");
 const fixes = document.querySelector(".fixes");
 const submit = document.querySelector(".submit");
-const list = document.querySelector("#list");
 
 const bugUpdate = document.querySelector(".bug-update");
 const projectUpdate = document.querySelector(".project-update");
@@ -13,8 +12,8 @@ const issueUpdate = document.querySelector(".issue-update");
 const fixesUpdate = document.querySelector(".fixes-update");
 const submitUpdate = document.querySelector(".submit-update");
 
+const list = document.querySelector("#list");
 const modal = document.querySelector(".modal");
-
 const options = {
   weekday: "short",
   year: "numeric",
@@ -28,14 +27,14 @@ const now = new Date();
 let ID = Math.floor(Math.random() * 1000);
 const bugLog = [];
 
-window.addEventListener("submit", function (e) {
+submit.addEventListener("click", function (e) {
   e.preventDefault();
   saveBug();
 });
 
 const pushToList = function (bug) {
   list.insertAdjacentHTML(
-    "afterbegin",
+    "beforebegin",
     `<div>
     <p>🛣: ${bug.project} Miles</p>
         <p>📆: ${bug.bug}</p>
@@ -54,35 +53,20 @@ const pushToList = function (bug) {
     deleteBtn.parentElement.remove();
   });
   updateBtn.addEventListener("click", function (e) {
-    updateBugLog(
-      e.target.previousElementSibling.previousElementSibling.innerHTML
-    );
+    updateBugLog(e.target.previousElementSibling.previousElementSibling);
+    removeFromStorage(e.target.previousElementSibling.previousElementSibling);
+    e.target.parentElement.remove();
   });
-};
-
-const updateBugLog = function (id) {
-  let log;
-  bugLog.forEach((bug, i) => {
-    if (bug === null) return;
-    else {
-      if (bug.id == id) {
-        return (log = bug);
-      }
-    }
-  });
-  modal.classList.toggle("hidden");
-  populateModal(log);
-  removeFromStorage(log);
 };
 
 const populateModal = function (log) {
   bugUpdate.value = log.bug;
   projectUpdate.value = log.project;
   issueUpdate.value = log.issue;
-  fixesUpdate.value = log.issue;
-  submitUpdate.addEventListener("submit", function (e) {
-    modal.classList.toggle("hidden");
+  fixesUpdate.value = log.fixes;
+  submitUpdate.addEventListener("click", function (e) {
     e.preventDefault;
+    modal.classList.toggle("hidden");
     saveBugUpdate();
   });
 };
@@ -111,6 +95,7 @@ const saveBug = function () {
     id: ID,
     date: now.toLocaleDateString("en-US", options),
   };
+  bugLog.unshift(log);
   localStorage.setItem(localStorage.length, JSON.stringify(log));
   pushToList(log);
 };
@@ -124,6 +109,7 @@ const saveBugUpdate = function () {
     id: ID,
     date: now.toLocaleDateString("en-US", options),
   };
+  modal.classList.toggle("hidden");
   localStorage.setItem(localStorage.length, JSON.stringify(log));
   pushToList(log);
 };
@@ -141,6 +127,27 @@ const removeFromStorage = function (id) {
       }
     }
   });
+  bugLog.forEach((bug) => {
+    if (bug === null) return;
+    else localStorage.setItem(localStorage.lenght, JSON.stringify(bug));
+  });
+};
+
+const updateBugLog = function (id) {
+  const value = id.innerHTML;
+  localStorage.clear();
+  let log;
+  //   localStorage.clear();
+  bugLog.forEach((bug, i) => {
+    if (bug === null) return;
+    else {
+      if (value == bug.id) {
+        log = bugLog[i];
+      }
+    }
+  });
+  modal.classList.toggle("hidden");
+  populateModal(log);
   bugLog.forEach((bug) => {
     if (bug === null) return;
     else localStorage.setItem(localStorage.lenght, JSON.stringify(bug));

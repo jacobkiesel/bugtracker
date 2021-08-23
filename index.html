@@ -26,33 +26,43 @@
           required
         ></textarea
         ><br />
-        <input class="submit" type="submit" />
+        <button class="submit">Submit</button>
       </form>
     </div>
     <div id="list"></div>
     <div class="modal hidden">
-      <form class="form" action="">
-        <label for="bug">Bug: </label>
-        <input class="bug-update" name="bug" type="text" required /><br />
-        <label for="project">Project: </label>
+      <form class="form-update" action="">
+        <label for="bug-update">Bug: </label>
         <input
-          class="project-update"
-          name="project"
+          class="bug-update"
+          name="bug-update"
           type="text"
           required
         /><br />
-        <label for="issue">Issue: </label>
-        <input class="issue-update" name="issue" type="text" required /><br />
-        <label for="fixes">Possible Fixes:</label>
+        <label for="project-update">Project: </label>
+        <input
+          class="project-update"
+          name="project-update"
+          type="text"
+          required
+        /><br />
+        <label for="issue-update">Issue: </label>
+        <input
+          class="issue-update"
+          name="issue-update"
+          type="text"
+          required
+        /><br />
+        <label for="fixes-update">Possible Fixes:</label>
         <textarea
           class="fixes-update"
-          name="fixes"
+          name="fixes-update"
           rows="4"
           cols="17"
           required
         ></textarea
         ><br />
-        <input class="submit-update" type="submit" />
+        <button class="submit-update">Submit</button>
       </form>
     </div>
     <script src="script.js"></script>
