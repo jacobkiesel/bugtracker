@@ -112,6 +112,9 @@ const saveBug = function () {
     id: Math.floor(Math.random() * 1000),
     date: now.toLocaleDateString("en-US", options),
   };
+  bug.value = "";
+  project.value = "";
+  fixes.value = "";
   bugLog.unshift(log);
   localStorage.setItem(localStorage.length, JSON.stringify(log));
   pushToList(log);

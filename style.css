@@ -49,6 +49,7 @@ button:hover {
   flex-wrap: wrap;
 }
 article {
+  width: 400px;
   margin-bottom: 40px;
 }
 .main-fields {
@@ -91,6 +92,6 @@ article {
     flex-wrap: wrap;
   }
   .form {
-    width: 80%;
+    width: 300px;
   }
 }
