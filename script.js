@@ -48,7 +48,7 @@ const pushToList = function (bug) {
         <p>Bug:     ${bug.bug}</p>
         <p>Fixes:   ${bug.fixes}</p>
         <p class= "id hidden">${bug.id}</p>
-        <button class="delete">Delete</button>s
+        <button class="delete">Delete</button>
         <button class="update">Update</button>
     </div>`
   );
